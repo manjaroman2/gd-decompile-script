@@ -17,3 +17,11 @@
 
 One liner: 
 `./install_env-3.5.3.sh && ./decomp-3.5.3.sh <path to .pck> <path to output dir>`
+
+
+
+
+
+### Todo
+
+If someone wants to port this to Godot 4.x, go for it 
