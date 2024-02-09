@@ -13,7 +13,7 @@ pyston_scons() {
 }
 
 if [ ! -d "pyston_2.3.5" ]; then
-    echo "installing pyston locally" 
+    echo "installing pyston locally ..." 
     curl -LO https://github.com/pyston/pyston/releases/download/pyston_2.3.5/pyston_2.3.5_portable_amd64.tar.gz
     tar xf pyston_2.3.5_portable_amd64.tar.gz
     rm pyston_2.3.5_portable_amd64.tar.gz
@@ -37,6 +37,7 @@ fi
 echo "---------------- installing godot engine ----------------"
 cd $base
 git clone https://github.com/godotengine/godot.git -b $godot_engine $godot_dirname
+git config advice.detachedHead false
 cd $godot_dirname/modules 
 git clone https://github.com/CoaguCo-Industries/GodotSteam.git -b godot3 godotsteam
 cd godotsteam/sdk
@@ -121,7 +122,7 @@ editor_executable="$editor_bin/godot.x11.opt.tools.64"
 libsteam_path="$output_dir/addons/godotsteam/x11"
 key=$(cat key.txt)
 
-rcv "rm -rf $output_dir"
+rcv "rm -r $output_dir"
 rc "./gdre_tools.x86_64 --headless --recover=\"$game_pck\" --output-dir=\"$output_dir\" --key=$key"
 rcv "python fix_gde.py --path=$output_dir"
 rcv "mkdir -p $libsteam_path"

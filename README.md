@@ -2,8 +2,8 @@
 
 ### Requirements:
 - Game compiled in Godot Engine 3.5.3
-- Encryption key if encrypted (put in key.txt)
-- [Latest Steamworks sdk](https://partner.steamgames.com/dashboard)
+- [Encryption key if encrypted](https://github.com/pozm/gdke) (put in key.txt)
+- [Latest Steamworks sdk](https://partner.steamgames.com/dashboard) (rename to steamworks_sdk.zip)
 
 [compiling godot engine](https://docs.godotengine.org/en/3.5/development/compiling/compiling_for_x11.html): 
 - Clang 6+
