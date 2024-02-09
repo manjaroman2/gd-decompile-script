@@ -1,0 +1,4 @@
+stuff/
+*.sh
+key.txt
+!install_env-*.sh
