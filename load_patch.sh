@@ -16,11 +16,11 @@ echo name=$name
 git clone $gitpatch
 
 cat <<EOF >$name/common.py
-exdir=\"$(realpath $exdir)\"
+exdir="$(realpath $exdir)"
 EOF
 
-chmod +x $name/setup.sh $exdir $(realpath $name)
-$name/setup.sh 
+chmod +x $name/setup.sh 
+$name/setup.sh $exdir $(realpath $name)
 
 echo "python $2/apply.py" 
 echo "python $2/create_patch.py" 
