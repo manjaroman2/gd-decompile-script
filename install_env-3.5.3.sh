@@ -143,6 +143,7 @@ bbcheat/
 *.log
 *.import
 *.godot
+.vscode/
 EOF1
 
 rc "git add . && git commit -am \"init\""
