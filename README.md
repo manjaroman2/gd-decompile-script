@@ -6,7 +6,7 @@
 - [Latest Steamworks sdk](https://partner.steamgames.com/dashboard) (rename to steamworks_sdk.zip)
 
 [compiling godot engine](https://docs.godotengine.org/en/3.5/development/compiling/compiling_for_x11.html): 
-- Clang 6+
+- gcc
 - pkg-config (used to detect the dependencies below).
 - X11, Xcursor, Xinerama, Xi and XRandR development libraries.
 - MesaGL development libraries.
@@ -19,7 +19,9 @@ One liner:
 `./install_env-3.5.3.sh && ./decomp-3.5.3.sh <path to .pck> <path to output dir>`
 
 
-
+### Creating patches
+- (Fork this repo)[https://github.com/manjaroman2/gd-decompile-patch]
+- Create a patch.txt according to patch_template.txt 
 
 
 ### Todo
