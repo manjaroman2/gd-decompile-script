@@ -11,7 +11,7 @@ scons_args="" # use_llvm=yes linker=lld
 
 scons_cmd() {
     # scons $@ #>/dev/null
-    $base/pyston_2.3.5/bin/scons $@
+    $base/pyston_2.3.5/bin/scons $@ >/dev/null
 }
 
 if [ ! -d "pyston_2.3.5" ]; then
@@ -150,8 +150,8 @@ rc "git add . && git commit -am \"init\""
 cd .. 
 
 cat <<EOF1 > run_editor.sh 
-code $output_dir
-$editor_executable -e --path $output_dir"
+code "$output_dir"
+$editor_executable -e --path "$output_dir"
 EOF1
 chmod +x run_editor.sh
 
