@@ -13,5 +13,7 @@
 - ALSA development libraries.
 - PulseAudio development libraries.
 
+[(If you're on arch, you have to do this as well)](https://github.com/godotengine/godot/issues/46375#issuecomment-1373075734)
+
 One liner: 
 `./install_env-3.5.3.sh && ./decomp-3.5.3.sh <path to .pck> <path to output dir>`
