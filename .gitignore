@@ -4,4 +4,6 @@ stuff/
 key.txt
 *.zip
 gdre_tools*
-godot_*
+godot*
+gdnative*
+pyston*

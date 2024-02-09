@@ -6,6 +6,18 @@ godot_engine="3.5.3-stable"
 godot_dirname="$base/godot_steam-$godot_engine"
 gdnative_dir="$base/gdnative-$godot_engine"
 
+scons_args="use_llvm=yes"
+
+pyston_scons() {
+    ./pyston_2.3.5/bin/scons $@
+}
+
+echo "installing pyston locally" 
+curl -LO https://github.com/pyston/pyston/releases/download/pyston_2.3.5/pyston_2.3.5_portable_amd64.tar.gz
+tar xf pyston_2.3.5_portable_amd64.tar.gz
+rm pyston_2.3.5_portable_amd64.tar.gz
+cd pyston_2.3.5
+./pyston -m pip install scons 
 
 if [ ! -f gdre_tools.x86_64 ] || [ ! -f gdre_tools.pck ]; then
     echo "missing gdre_tools ..."
@@ -15,9 +27,9 @@ if [ ! -f gdre_tools.x86_64 ] || [ ! -f gdre_tools.pck ]; then
     chmod +x gdre_tools.x86_64
 fi
 
-if [ ! -f steamworks_sdk_158a.zip ]; then
-    echo "missing steamworks sdk ..."
-    curl -LO https://partner.steamgames.com/downloads/steamworks_sdk_158a.zip
+if [ ! -f steamworks_sdk.zip ]; then
+    echo "missing steamworks_sdk.zip ..."
+    curl -L https://partner.steamgames.com/downloads/steamworks_sdk_158a.zip -o $base/steamworks_sdk.zip
 fi
 
 echo "---------------- installing godot engine ----------------"
@@ -26,10 +38,10 @@ git clone https://github.com/godotengine/godot.git -b $godot_engine $godot_dirna
 cd $godot_dirname/modules 
 git clone https://github.com/CoaguCo-Industries/GodotSteam.git -b godot3 godotsteam
 cd godotsteam/sdk
-unzip -o $base/steamworks_sdk_158a.zip -d .. >/dev/null
+unzip -o $base/steamworks_sdk.zip -d .. >/dev/null
 cd $godot_dirname
 echo "compiling godot_steam-$godot_engine ..."
-scons platform=x11 production=yes tools=yes target=release_debug >/dev/null
+pyston_scons platform=x11 production=yes tools=yes target=release_debug $scons_args >/dev/null
 ln -s $godot_dirname/modules/godotsteam/sdk/redistributable_bin/* $godot_dirname/bin/ >/dev/null
 
 echo "---------------- installing gdnative ----------------"
@@ -39,13 +51,13 @@ cd $gdnative_dir
 git clone --recurse-submodules https://github.com/godotengine/godot-cpp.git -b godot-$godot_engine godot-cpp
 cd godot-cpp
 echo "compiling godot-cpp ..."
-scons platform=linux generate_bindings=yes target=release >/dev/null
+pyston_scons platform=linux generate_bindings=yes target=release $scons_args >/dev/null
 cd $gdnative_dir
 ln -s $godot_dirname/modules/godotsteam/sdk/public/ godotsteam/sdk/
 ln -s $godot_dirname/modules/godotsteam/sdk/redistributable_bin/ godotsteam/sdk/
 mkdir bin/
 echo "compiling gdnative-$godot_engine ..."
-scons platform=linux production=yes target=release >/dev/null
+pyston_scons platform=linux production=yes target=release $scons_args >/dev/null
 cp $gdnative_dir/bin/linuxbsd/libgodotsteam.so $godot_dirname/bin
 # rm -rf $gdnative_dir
 
