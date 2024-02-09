@@ -118,7 +118,7 @@ editor_bin="$godot_dirname/bin"
 gdnative_dir="$gdnative_dir"
 EOF
 cat <<'EOF' >> decomp-3.5.3.sh 
-editor_executable="$editor_bin/godot.x11.opt.tools.64"
+editor_executable="$editor_bin/godot.x11.opt.tools.64.llvm"
 libsteam_path="$output_dir/addons/godotsteam/x11"
 key=$(cat key.txt)
 
