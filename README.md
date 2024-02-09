@@ -18,12 +18,11 @@
 One liner: 
 `./install_env-3.5.3.sh && ./decomp-3.5.3.sh <path to .pck> <path to output dir>`
 
-
 ### Creating patches
 - [Fork this repo](https://github.com/manjaroman2/gd-decompile-patch)
 - Create a patch.txt according to patch_template.txt 
 - `./load_patch.sh`
-
+- One liner: `./install_env-3.5.3.sh && ./load_patch.sh`
 
 ### Todo
 
