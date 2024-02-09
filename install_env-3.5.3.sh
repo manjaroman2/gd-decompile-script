@@ -9,15 +9,17 @@ gdnative_dir="$base/gdnative-$godot_engine"
 scons_args="use_llvm=yes"
 
 pyston_scons() {
-    ./pyston_2.3.5/bin/scons $@
+    $base/pyston_2.3.5/bin/scons $@
 }
 
-echo "installing pyston locally" 
-curl -LO https://github.com/pyston/pyston/releases/download/pyston_2.3.5/pyston_2.3.5_portable_amd64.tar.gz
-tar xf pyston_2.3.5_portable_amd64.tar.gz
-rm pyston_2.3.5_portable_amd64.tar.gz
-cd pyston_2.3.5
-./pyston -m pip install scons 
+if [ ! -d "pyston_2.3.5" ]; then
+    echo "installing pyston locally" 
+    curl -LO https://github.com/pyston/pyston/releases/download/pyston_2.3.5/pyston_2.3.5_portable_amd64.tar.gz
+    tar xf pyston_2.3.5_portable_amd64.tar.gz
+    rm pyston_2.3.5_portable_amd64.tar.gz
+    cd pyston_2.3.5
+    ./pyston -m pip install scons 
+fi
 
 if [ ! -f gdre_tools.x86_64 ] || [ ! -f gdre_tools.pck ]; then
     echo "missing gdre_tools ..."
