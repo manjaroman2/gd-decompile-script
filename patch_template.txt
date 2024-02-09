@@ -1,0 +1,3 @@
+exdir="<SOME DIR>"
+gitpatch="<SOME GIT REPO>"
+pck_file="<SOME PCK FILE>"
