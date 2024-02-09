@@ -1,9 +1,4 @@
-stuff/
-*.sh
+*
 !install_env-*.sh
-key.txt
-*.zip
-gdre_tools*
-godot*
-gdnative*
-pyston*
+!*.py
+!README.md
