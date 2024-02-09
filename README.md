@@ -1,4 +1,4 @@
-## Godot Game decompile script (for Linux)
+## Godot Steam Game decompile script (for Linux)
 
 ### Requirements:
 - Game compiled in Godot Engine 3.5.3
