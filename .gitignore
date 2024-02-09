@@ -1,4 +1,7 @@
 stuff/
 *.sh
-key.txt
 !install_env-*.sh
+key.txt
+*.zip
+gdre_tools*
+godot_*
