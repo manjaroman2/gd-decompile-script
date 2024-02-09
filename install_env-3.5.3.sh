@@ -6,9 +6,11 @@ godot_engine="3.5.3-stable"
 godot_dirname="$base/godot_steam-$godot_engine"
 gdnative_dir="$base/gdnative-$godot_engine"
 
-scons_args="use_llvm=yes use_lld=yes"
+# use_llvm=false
+scons_args="" # use_llvm=yes linker=lld
 
-pyston_scons() {
+scons_cmd() {
+    # scons $@ #>/dev/null
     $base/pyston_2.3.5/bin/scons $@
 }
 
@@ -44,7 +46,7 @@ cd godotsteam/sdk
 unzip -o $base/steamworks_sdk.zip -d .. >/dev/null
 cd $godot_dirname
 echo "compiling godot_steam-$godot_engine ..."
-pyston_scons platform=x11 production=yes tools=yes target=release_debug $scons_args >/dev/null
+scons_cmd platform=x11 production=yes tools=yes target=release_debug $scons_args 
 ln -s $godot_dirname/modules/godotsteam/sdk/redistributable_bin/* $godot_dirname/bin/ >/dev/null
 
 echo "---------------- installing gdnative ----------------"
@@ -54,13 +56,13 @@ cd $gdnative_dir
 git clone --recurse-submodules https://github.com/godotengine/godot-cpp.git -b godot-$godot_engine godot-cpp
 cd godot-cpp
 echo "compiling godot-cpp ..."
-pyston_scons platform=linux generate_bindings=yes target=release $scons_args >/dev/null
+scons_cmd platform=linux generate_bindings=yes target=release $scons_args 
 cd $gdnative_dir
 ln -s $godot_dirname/modules/godotsteam/sdk/public/ godotsteam/sdk/
 ln -s $godot_dirname/modules/godotsteam/sdk/redistributable_bin/ godotsteam/sdk/
 mkdir bin/
 echo "compiling gdnative-$godot_engine ..."
-pyston_scons platform=linux production=yes target=release $scons_args >/dev/null
+scons_cmd platform=linux production=yes target=release $scons_args 
 cp $gdnative_dir/bin/linuxbsd/libgodotsteam.so $godot_dirname/bin
 # rm -rf $gdnative_dir
 
@@ -118,11 +120,11 @@ editor_bin="$godot_dirname/bin"
 gdnative_dir="$gdnative_dir"
 EOF
 cat <<'EOF' >> decomp-3.5.3.sh 
-editor_executable="$editor_bin/godot.x11.opt.tools.64.llvm"
+editor_executable="$editor_bin/godot.x11.opt.tools.64"
 libsteam_path="$output_dir/addons/godotsteam/x11"
 key=$(cat key.txt)
 
-rcv "rm -r $output_dir"
+rcv "rm -rf $output_dir"
 rc "./gdre_tools.x86_64 --headless --recover=\"$game_pck\" --output-dir=\"$output_dir\" --key=$key"
 rcv "python fix_gde.py --path=$output_dir"
 rcv "mkdir -p $libsteam_path"
