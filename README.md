@@ -22,7 +22,7 @@ One liner:
 ### Creating patches
 - [Fork this repo](https://github.com/manjaroman2/gd-decompile-patch)
 - Create a patch.txt according to patch_template.txt 
-- ./load_patch.sh
+- `./load_patch.sh`
 
 
 ### Todo
