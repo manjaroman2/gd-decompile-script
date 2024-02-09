@@ -22,5 +22,5 @@ EOF
 chmod +x $name/setup.sh 
 $name/setup.sh $exdir $(realpath $name)
 
-echo "python $2/apply.py" 
-echo "python $2/create_patch.py" 
+echo "python $name/apply.py" 
+echo "python $name/create_patch.py" 
