@@ -6,7 +6,7 @@ godot_engine="3.5.3-stable"
 godot_dirname="$base/godot_steam-$godot_engine"
 gdnative_dir="$base/gdnative-$godot_engine"
 
-scons_args="use_llvm=yes"
+scons_args="use_llvm=yes use_lld=yes"
 
 pyston_scons() {
     $base/pyston_2.3.5/bin/scons $@
